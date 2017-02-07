@@ -15,10 +15,10 @@ function device_swiching_shortcode($atts,$content=null) {
 	if (!$target) {
 		return;
 	}
-	
-	$target = split(",",$target);
+
+	$target = str_split(",",$target);
 	$agent = $_SERVER['HTTP_USER_AGENT'];
-	
+
 	if (in_array("feature",$target)) {
 		if (ereg("^DoCoMo", $agent)) {
 			return $content;
@@ -53,4 +53,3 @@ function device_swiching_shortcode($atts,$content=null) {
 	}
 }
 add_shortcode('switch', 'device_swiching_shortcode');
-?>
