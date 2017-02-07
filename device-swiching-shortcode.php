@@ -16,7 +16,7 @@ function device_swiching_shortcode($atts,$content=null) {
 		return;
 	}
 
-	$target = split(",",$target);
+	$target = str_split(",",$target);
 	$agent = $_SERVER['HTTP_USER_AGENT'];
 
 	if (in_array("feature",$target)) {
