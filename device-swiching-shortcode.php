@@ -20,34 +20,34 @@ function device_swiching_shortcode($atts,$content=null) {
 	$agent = $_SERVER['HTTP_USER_AGENT'];
 
 	if (in_array("feature",$target)) {
-		if (ereg("^DoCoMo", $agent)) {
+		if (preg_match("/^DoCoMo/", $agent)) {
 			return $content;
-		} else if (ereg("^J-PHONE|^Vodafone|^MOT-[CV]|^SoftBank", $agent)) {
+		} else if (preg_match("/^J-PHONE|^Vodafone|^MOT-[CV]|^SoftBank/", $agent)) {
 			return $content;
-		} else if (ereg("^KDDI", $agent) || ereg("^UP.Browser", $agent)) {
+		} else if (preg_match("/^KDDI/", $agent) || preg_match("/^UP.Browser/", $agent)) {
 			return $content;
 		}
 	}
 	if (in_array("mobile",$target)) {
-		if (ereg("iPhone", $agent)) {
+		if (preg_match("/iPhone/", $agent)) {
 			return $content;
-		} else if (ereg("Android", $agent)) {
-			if (ereg("Mobile", $agent)) {
+		} else if (preg_match("/Android/", $agent)) {
+			if (preg_match("/Mobile/", $agent)) {
 				return $content;
 			}
 		}
 	}
 	if (in_array("tablet",$target)) {
-		if (ereg("iPad", $agent)){
+		if (preg_match("/iPad/", $agent)){
 			return $content;
-		} else if (ereg("Android", $agent)){
-			if (!ereg("Mobile", $agent)){
+		} else if (preg_match("/Android/", $agent)){
+			if (!preg_match("/Mobile/", $agent)){
 				return $content;
 			}
 		}
 	}
 	if (in_array("pc",$target)) {
-		if(!ereg("iPhone", $agent) && !ereg("iPad", $agent) && !ereg("Android", $agent) && !ereg("^DoCoMo", $agent) && !ereg("^J-PHONE|^Vodafone|^MOT-[CV]|^SoftBank", $agent) && !ereg("^KDDI", $agent) || ereg("^UP.Browser", $agent)) {
+		if(!preg_match("/iPhone/", $agent) && !preg_match("/iPad/", $agent) && !preg_match("/Android/", $agent) && !preg_match("/^DoCoMo/", $agent) && !preg_match("/^J-PHONE|^Vodafone|^MOT-[CV]|^SoftBank/", $agent) && !preg_match("/^KDDI/", $agent) || preg_match("/^UP.Browser/", $agent)) {
 			return $content;
 		}
 	}
